@@ -26,7 +26,6 @@ func main() {
 	defer file.Close()
 
 	w := bufio.NewWriter(file)
-	defer w.Flush()
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
@@ -43,6 +42,7 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+		w.Flush()
 		fmt.Printf("%s: %s\n", timeString, row)
 	}
 
